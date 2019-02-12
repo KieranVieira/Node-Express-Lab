@@ -1,10 +1,11 @@
 const express = require('express');
-
+const cors = require('cors');
 const db = require('../data/db');
 
 const router = express.Router()
 
 router.use(express.json())
+router.use(cors())
 
 router.post('/', (req, res) => {
     const postData = req.body;
