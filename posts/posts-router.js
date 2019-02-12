@@ -7,7 +7,14 @@ const router = express.Router()
 router.use(express.json())
 
 router.get('/', (req, res) => {
-    res.send('posts')
+    db.find()
+        .then(posts => {
+            res.status(200).json(posts)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ error: "The posts information could not be retrieved." })
+        })
 });
 
 module.exports = router;
