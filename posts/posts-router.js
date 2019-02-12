@@ -83,7 +83,7 @@ router.put('/:id', (req, res) => {
             })
             .catch(err => {
                 console.log(err);
-                res.status(400).json({ errorMessage: "Please provide title or contents for the post." })
+                res.status(400).json({ errorMessage: "Please provide title and contents for the post." })
             })
     } catch (error) {
         res.status(500).json({ error: "The post information could not be modified." })
