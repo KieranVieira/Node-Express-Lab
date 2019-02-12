@@ -57,7 +57,6 @@ router.delete('/:id', (req, res) => {
     try {
         db.remove(postId)
             .then(post => {
-                console.log(post)
                 if(post){
                     res.status(200).json({ message: "Post was removed" })
                 }else{
@@ -67,6 +66,27 @@ router.delete('/:id', (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "The post could not be removed" })
+    }
+});
+
+router.put('/:id', (req, res) => {
+    const postUpdate = req.body;
+    const postId = req.params.id;
+    try {
+        db.update(postId, postUpdate)
+            .then(post => {
+                if(post){
+                    res.status(200).json(postUpdate)
+                }else{
+                    res.status(404).json({ message: "The post with the specified ID does not exist." })
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(400).json({ errorMessage: "Please provide title or contents for the post." })
+            })
+    } catch (error) {
+        res.status(500).json({ error: "The post information could not be modified." })
     }
 });
 
